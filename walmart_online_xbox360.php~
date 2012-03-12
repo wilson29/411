@@ -6,21 +6,23 @@ for($i=0; $i<=660; $i+=60){
   $url = $url_part1.$i; 
   $html->load_file($url);
   $games = $html->find('div[class=prodInfoBox]'); 
-  print_r(sizeof($games));
   foreach($games as $game) {
     $ret = $game->find('.VGRating');
     if(sizeof($ret) > 0){
-      print($game->children(0)->plaintext);
+      print($game->children(0)->plaintext); //title
       print("is rated: ");
       $rating = explode(" ", ($game->children(3)->plaintext));
       //  hack for Everyone 10+  
       if(sizeof($rating) > 3){
-        print_r($rating[2]." ".$rating[3]);
+        print_r($rating[2]." ".$rating[3]); //rating
       }       
       else{
-        print_r($rating[2]);
+        print_r($rating[2]); //rating
       }
-       print("<br>");
+      $price = $game->children(2)->children(1)->first_child()->first_child()->plaintext;
+      print(" and it costs: ");      
+      print_r($price);
+      print("<br>");
       }
   }
 }
