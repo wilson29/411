@@ -6,6 +6,7 @@ for($i=0; $i<=660; $i+=60){
   $url = $url_part1.$i; 
   $html->load_file($url);
   $games = $html->find('div[class=prodInfoBox]'); 
+  print_r(sizeof($games));
   foreach($games as $game) {
     $ret = $game->find('.VGRating');
     if(sizeof($ret) > 0){
